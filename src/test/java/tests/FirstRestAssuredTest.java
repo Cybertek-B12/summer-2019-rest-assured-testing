@@ -62,4 +62,24 @@ public class FirstRestAssuredTest {
     }
 
 
+    /**
+     * When i send requesto to http://api.openrates.io/latest
+     * Then response should contain header application/json
+     */
+    @Test
+    public void verifyContentType(){
+        Response response = when().get("http://api.openrates.io/latest");
+        // response.getContentType --> returns the content type of the response
+        String contentType = response.getContentType();
+        System.out.println(contentType);
+        // response.getStatusCode --> returns the status code of teh response
+        int statusCode = response.getStatusCode();
+        System.out.println(statusCode);
+
+        assertEquals("application/json", contentType);
+
+    }
+
+
+
 }
