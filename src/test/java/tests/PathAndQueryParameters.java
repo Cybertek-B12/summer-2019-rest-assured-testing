@@ -46,7 +46,7 @@ public class PathAndQueryParameters {
     public void queryParams(){
 
         Response response = given().queryParams("base", "USD").
-                            when().get("http://api.openrates.io/latest");
+                            when().get("http://api.openrates.io/latest/");
         response.prettyPeek();
         assertTrue(response.asString().contains("\"base\":\"USD\""));
     }
@@ -94,6 +94,27 @@ public class PathAndQueryParameters {
         assertTrue(responseStr.contains("2020-01-02") && responseStr.contains("MYR"));
         assertFalse(responseStr.contains("EUR"));
 
+    }
+
+
+    @Test
+    public void testCity(){
+        Response response = given().log().all().
+                queryParam("query","Chicago").when().
+                get("https://www.metaweather.com/api/location/search");
+        response.prettyPeek().then().statusCode(200);
+        String  responseStr= response.asString();
+        assertTrue(responseStr.contains("Chicago"));
+    }
+
+    @Test
+    public void testCity2(){
+        Response response = given().log().all()
+                .queryParam("query","New New York").when().
+                get("https://www.metaweather.com/api/location/search");
+        response.prettyPeek().then().statusCode(400);
+        String  responseStr= response.asString();
+        assertTrue(responseStr.contains("New New York"));
     }
 
 }
