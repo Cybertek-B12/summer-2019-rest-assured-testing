@@ -3,6 +3,8 @@ package tests;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -78,8 +80,33 @@ public class FirstRestAssuredTest {
 
         assertEquals("application/json", contentType);
 
+        // this line will print and also very
+        response.prettyPeek().then().statusCode(200);
     }
 
+    /**
+     *    when i send request to  http://api.zippopotam.us/us/22031
+     *    Then the status must 200
+     *    And verify that response contains Fairfax
+     */
 
+
+    @Test
+    public void statusCodeVerify(){
+        Response response = when().get("http://api.zippopotam.us/us/22031");
+        response.prettyPrint();
+        response.then().statusCode(200);
+        assertTrue(response.asString().contains("Fairfax"));
+    }
+
+    /**
+     *    when i send request to  http://api.zippopotam.us/us/22031111
+     *    Then the status must 404
+     */
+    @Test
+    public void statusCodeVerify2(){
+        Response response = when().get("http://api.zippopotam.us/us/220313234");
+        response.prettyPeek().then().statusCode(404);
+    }
 
 }
