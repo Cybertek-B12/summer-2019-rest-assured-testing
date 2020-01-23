@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FirstRestAssuredTest {
 
     /**
-     * wehn i send requesto to http://api.openrates.io/latest
+     * when i send request to http://api.openrates.io/latest
      * Then the status must 200
      */
 
@@ -40,5 +40,26 @@ public class FirstRestAssuredTest {
         System.out.println(bodyStr);
         assertTrue(bodyStr.contains("\"base\":\"EUR\""));
     }
+
+    /**
+     * When i send requesto to http://api.openrates.io/latest
+     * Then response should contain header application/json
+     */
+
+    @Test
+    public void verifyHeader1(){
+        Response response = when().get("http://api.openrates.io/latest");
+        // response.header() --> returns the value of the provided header
+        String contentType = response.header("Content-Type");
+        String date = response.header("Date");
+
+        System.out.println("contentType = " + contentType);
+        System.out.println("date = " + date);
+
+        assertEquals("application/json", contentType);
+        assertTrue(date.contains("2020"));
+
+    }
+
 
 }
