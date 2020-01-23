@@ -71,5 +71,29 @@ public class PathAndQueryParameters {
     }
 
 
+    /**
+     * given i create request with query parameter base=USD and symbol=MYR
+     * and path parameter date = 2020-01-02
+     * when i send my request to http://api.openrates.io/{date}
+     * then the response should contain "base": "USD"
+     * and body should contain MYR
+     * but should not contain EUR
+     */
+
+    @Test
+    public void testPathAndQueryParams(){
+        // this request uses both path and query parameters
+
+        Response response = given().
+                pathParam("date", "2020-01-02").
+                queryParam("base", "USD").
+                queryParam("symbols", "MYR").
+                when().get("http://api.openrates.io/{date}");
+        response.prettyPeek();
+        String responseStr = response.asString();
+        assertTrue(responseStr.contains("2020-01-02") && responseStr.contains("MYR"));
+        assertFalse(responseStr.contains("EUR"));
+
+    }
 
 }
