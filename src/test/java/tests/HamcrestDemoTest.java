@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static io.restassured.RestAssured.when;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
@@ -38,5 +39,7 @@ public class HamcrestDemoTest {
 
         assertThat(list, everyItem(greaterThan(0)));
 
+//        USE THIS ONE
+//        when().get("http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/countries/{id}")
     }
 }
