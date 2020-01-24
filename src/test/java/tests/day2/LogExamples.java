@@ -1,5 +1,7 @@
 package tests.day2;
 
+import io.restassured.RestAssured;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -7,13 +9,18 @@ import static io.restassured.RestAssured.when;
 
 public class LogExamples {
 
+
+    @BeforeAll
+    public static void setUp(){
+        RestAssured.baseURI = "http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr";
+    }
     @Test
     public void test1() {
         // request logging
         // log().all(). --> prints everything in the request
         given().log().everything().
                 pathParam("id", "7").
-                when().get("http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/regions/{id}").
+                when().get("/regions/{id}").
                 then().
                 statusCode(200);
 
@@ -28,9 +35,19 @@ public class LogExamples {
         // log().ifValidationFails --> prints if any assertion fails
 
         given().pathParam("id", "234237").
-                when().get("http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/regions/{id}").
+                when().get("/regions/{id}").
                 then().log().ifValidationFails().
                 statusCode(404);
+    }
+
+    @Test
+    public void test3(){
+        given().log().everything().
+                pathParam("id", "101").
+                when().get("/employees/{id}").
+                then().log().everything().
+                statusCode(200);
+
     }
 
 }
