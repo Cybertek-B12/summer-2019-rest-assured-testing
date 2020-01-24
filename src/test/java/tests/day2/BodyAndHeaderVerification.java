@@ -36,6 +36,12 @@ public class BodyAndHeaderVerification {
                 when().get("/employees/{id}").jsonPath();
         // Jsonpath --> class used to navigate through json body and extract values
 
-        System.out.println(jsonPath);
+//        System.out.println(jsonPath.prettyPrint());
+
+        String first_name = jsonPath.getString("first_name");
+        System.out.println(first_name);
+
+        String salary = jsonPath.getString("salary");
+        System.out.println(salary);
     }
 }
