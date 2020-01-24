@@ -1,6 +1,7 @@
 package tests.day2;
 
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -27,9 +28,14 @@ public class BodyAndHeaderVerification {
                 // extract the value of the key first_name and verify
                 and().body("first_name", equalTo("Neena"));
 
+    }
 
+    @Test
+    public void test2(){
+        JsonPath jsonPath = given().pathParam("id", "101").
+                when().get("/employees/{id}").jsonPath();
+        // Jsonpath --> class used to navigate through json body and extract values
 
-
-
+        System.out.println(jsonPath);
     }
 }
