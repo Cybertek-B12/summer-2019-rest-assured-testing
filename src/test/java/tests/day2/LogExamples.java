@@ -7,9 +7,10 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 
+// @TestInstance(Lifecycle.PER_CLASS)
 public class LogExamples {
 
-
+    // @BeforeAll --> runs before everything in this class. just like @BeforeClass from testng
     @BeforeAll
     public static void setUp(){
         RestAssured.baseURI = "http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr";
