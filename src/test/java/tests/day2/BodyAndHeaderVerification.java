@@ -86,6 +86,14 @@ public class BodyAndHeaderVerification {
         List<String> countriesList = jsonPath.getList("items.country_name");
         System.out.println(countriesList.size());
 
+        // get the first country in the list
+        String countryNumberOne = jsonPath.getString("items.country_name[1]");
+        System.out.println(countryNumberOne);
+
+        // get all coutry ids
+        List<Integer> ids = jsonPath.getList("items.region_id");
+        System.out.println(ids);
+
 
     }
 }
