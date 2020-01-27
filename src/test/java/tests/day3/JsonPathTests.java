@@ -1,7 +1,9 @@
 package tests.day3;
 
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.*;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
@@ -9,6 +11,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 class JsonPathTests {
+
+    @BeforeAll
+    public static void setUp(){
+        baseURI = "http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr";
+    }
 
     /**
      * given url "http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/regions/{id}"
@@ -21,7 +28,7 @@ class JsonPathTests {
     @Test
     public void validateRegionNameTest(){
         given().pathParam("id",1)
-                .when().get("http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/regions/{id}")
+                .when().get("/regions/{id}")
                 .prettyPeek()
                 .then().assertThat().statusCode(200)
                 .and().assertThat().body("region_id",equalTo(1))
@@ -32,7 +39,7 @@ class JsonPathTests {
     @Test
     public void validateRegionNameTest1(){
         Response response = given().pathParam("id",1)
-                .when().get("http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/regions/{id}");
+                .when().get("/regions/{id}");
         response.then().statusCode(200);
         JsonPath jsonPath = response.jsonPath();
         String id = jsonPath.getString("region_id");
@@ -41,4 +48,26 @@ class JsonPathTests {
         assertThat(name, equalTo("Europe"));
 
     }
+
+    /**
+     * given url "http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/employees/{id}"
+     * accept type is json
+     * when user makes get request with path param id=100
+     * and last_name id is equals to King
+     * then assert that status code is 200
+     */
+    @Test
+    public void testLastName(){
+
+        given().contentType(ContentType.JSON).                       // accept type is json
+                pathParam("id", "100").    // request with path param id=100
+                when().get("/employees/{id}").                         // when user makes get request
+                then().assertThat().statusCode(200).                            // assert that status code is 200
+                and().assertThat().body("last_name", is("King"));  // last_name id is equals to King
+    }
+
+
+
+
+
 }
