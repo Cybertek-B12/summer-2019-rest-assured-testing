@@ -152,14 +152,35 @@ class JsonPathTests {
                 when().get("/countries");// when user makes get request
         List<String> actualList = response.jsonPath().getList("items.country_name");
         System.out.println(actualList);
-
         List<String> expected = Arrays.asList("Argentina" ,"Brazil", "Mexico", "United States of America", "Zambia");
         System.out.println(expected);
+
+
+        assertThat(actualList, contains("Argentina" ,"Brazil", "Mexico", "United States of America", "Zambia"));
+
         for (String expectedCountry : expected) {
             assertTrue(actualList.contains(expectedCountry));
         }
-
     }
 
+     /*
+
+    Given accept type is JSON
+    When users sends a GET request to "/employees"
+    Then status code is 200
+    And Content type is application/json
+    And verify all salaries are bigger 100
+     */
+
+     @Test
+    public void salaryListTest(){
+         Response response = when().get("/employees");
+         response.then().statusCode(200);
+
+         List<Integer> list = response.jsonPath().getList("items.salary");
+         System.out.println(list);
+
+         assertThat(list, everyItem(greaterThan(100)));
+     }
 
 }
