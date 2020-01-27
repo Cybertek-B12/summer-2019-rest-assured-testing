@@ -26,7 +26,7 @@ public class JsonpathWithMapsTests {
                 .jsonPath();
 
 //        jsonPath.prettyPrint();
-
+// "" in jsonpath it means the root element
         Map<String, Object> personInfo = jsonPath.getMap("");
         System.out.println(personInfo);
 
@@ -35,7 +35,16 @@ public class JsonpathWithMapsTests {
         System.out.println(personInfo.get("hire_date"));
 
         System.out.println(personInfo.get("links"));
-
     }
+
+
+
+    @Test
+    public void metaWeatherTest(){
+        JsonPath jsonPath = given().queryParam("query", "london").
+                when().get("https://www.metaweather.com/api/location/search").jsonPath();
+        jsonPath.prettyPrint();
+    }
+
 
 }
