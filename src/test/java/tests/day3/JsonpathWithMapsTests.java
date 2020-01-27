@@ -6,11 +6,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class JsonpathWithMapsTests {
 
@@ -64,6 +66,27 @@ public class JsonpathWithMapsTests {
     }
 
 
+    /*
+    call the metaweather api with query param = san
+    verify all titles contain string 'san'
+     */
+    @Test
+    public void testNameContains(){
+        JsonPath jsonPath = given().queryParam("query", "san").
+                when().get("https://www.metaweather.com/api/location/search").jsonPath();
+        jsonPath.prettyPrint();
+
+        List<Map<String, String>> list = jsonPath.getList("");
+        System.out.println(list.size());
+        System.out.println(list);
+
+        for (Map<String, String> city : list) {
+            assertTrue(city.get("title").toLowerCase().contains("san"), city.get("title") + " did not contain title");
+
+        }
+
+
+    }
 
 
 }
