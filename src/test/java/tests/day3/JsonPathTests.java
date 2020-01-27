@@ -86,6 +86,36 @@ class JsonPathTests {
         assertThat(link, equalTo("http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/employees/100"));
 
     }
+    /*
+    Given accept type is JSON
+    When users sends a GET request to "/employees"
+    Then status code is 200
+    And Content type is application/json
+    And last_name of the first employee from payload is "King"
+    And salary of the first employee from payload is "24000"
+    And last_name of the last employee from payload is "Mourgos"
+    And salary of the last employee from payload is "5800"
+         */
+
+    @Test
+    public void testFirstAndLast(){
+        Response response = given().contentType(ContentType.JSON).                       // accept type is json
+                when().get("/employees");// when user makes get request
+        response.then().statusCode(200);
+        JsonPath jsonPath = response.jsonPath();
+        String firstLN = jsonPath.getString("items.last_name[0]");
+        assertThat(firstLN, is("King"));
+        String firstS = jsonPath.getString("items.salary[0]");
+        assertThat(firstS, is("24000"));
+
+        // -1 means last one, so items.last_name[-1] gets the last lastname
+        String lastFn = jsonPath.getString("items.last_name[-1]");
+        assertThat(lastFn, is("Mourgos"));
+
+        String lastS = jsonPath.getString("items.salary[-1]");
+        assertThat(lastS, is("5800"));
+
+    }
 
 
 }
