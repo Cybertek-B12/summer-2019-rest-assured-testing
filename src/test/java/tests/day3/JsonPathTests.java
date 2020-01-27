@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.*;
 class JsonPathTests {
 
     @BeforeAll
-    public static void setUp(){
+    public static void setUp() {
         baseURI = "http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr";
     }
 
@@ -26,19 +26,19 @@ class JsonPathTests {
      */
 
     @Test
-    public void validateRegionNameTest(){
-        given().pathParam("id",1)
+    public void validateRegionNameTest() {
+        given().pathParam("id", 1)
                 .when().get("/regions/{id}")
                 .prettyPeek()
                 .then().assertThat().statusCode(200)
-                .and().assertThat().body("region_id",equalTo(1))
-                .and().assertThat().body("region_name",equalTo("Europe"));
+                .and().assertThat().body("region_id", equalTo(1))
+                .and().assertThat().body("region_name", equalTo("Europe"));
     }
 
 
     @Test
-    public void validateRegionNameTest1(){
-        Response response = given().pathParam("id",1)
+    public void validateRegionNameTest1() {
+        Response response = given().pathParam("id", 1)
                 .when().get("/regions/{id}");
         response.then().statusCode(200);
         JsonPath jsonPath = response.jsonPath();
@@ -57,7 +57,7 @@ class JsonPathTests {
      * then assert that status code is 200
      */
     @Test
-    public void testLastName(){
+    public void testLastName() {
 
         given().contentType(ContentType.JSON).                       // accept type is json
                 pathParam("id", 100).    // request with path param id=100
@@ -75,7 +75,7 @@ class JsonPathTests {
      */
 
     @Test
-    public void link1(){
+    public void link1() {
         Response response = given().contentType(ContentType.JSON).                       // accept type is json
                 pathParam("id", 100).    // request with path param id=100
                 when().get("/employees/{id}");// when user makes get request
@@ -98,7 +98,7 @@ class JsonPathTests {
          */
 
     @Test
-    public void testFirstAndLast(){
+    public void testFirstAndLast() {
         Response response = given().contentType(ContentType.JSON).                       // accept type is json
                 when().get("/employees");// when user makes get request
         response.then().statusCode(200);
@@ -114,8 +114,32 @@ class JsonPathTests {
 
         String lastS = jsonPath.getString("items.salary[-1]");
         assertThat(lastS, is("5800"));
+        System.out.println("_______________________");
 
     }
+
+    /*
+    Given accept type is JSON
+    When users sends a GET request to "/employees"
+    Then status code is 200
+    And Content type is application/json
+    And verify first_name of the employee with employee_id 102  is equal Lex
+     */
+
+    @Test
+    public void getValuebasedOnAnotherValue() {
+        Response response = given().contentType(ContentType.JSON).                       // accept type is json
+                when().get("/employees");// when user makes get request
+        response.then().statusCode(200);
+        JsonPath jsonPath = response.jsonPath();
+        String string = jsonPath.getString("items.find {it.employee_id==102}.first_name");
+        assertThat(string, is("Lex"));
+
+    }
+
+    /*
+    Get all the
+     */
 
 
 }
