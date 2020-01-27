@@ -6,9 +6,13 @@ import io.restassured.response.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JsonPathTests {
 
@@ -138,8 +142,24 @@ class JsonPathTests {
     }
 
     /*
-    Get all the
+    Get all the countries using the "/countries"
+    verify following countries are listed: Argentina, Brazil, Mexico, United States of America, Zambia
      */
+
+    @Test
+    public void testCountryList(){
+        Response response = given().contentType(ContentType.JSON).                       // accept type is json
+                when().get("/countries");// when user makes get request
+        List<String> actualList = response.jsonPath().getList("items.country_name");
+        System.out.println(actualList);
+
+        List<String> expected = Arrays.asList("Argentina" ,"Brazil", "Mexico", "United States of America", "Zambia");
+        System.out.println(expected);
+        for (String expectedCountry : expected) {
+            assertTrue(actualList.contains(expectedCountry));
+        }
+
+    }
 
 
 }
