@@ -2,8 +2,10 @@ package tests.day3;
 
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
@@ -19,7 +21,7 @@ public class JsonpathWithMapsTests {
      */
 
     @Test
-    public void employeeInformationTest(){
+    public void employeeInformationTest() {
         JsonPath jsonPath = given().pathParam("id", 100).
                 contentType(ContentType.JSON).
                 when().get("http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/employees/{id}")
@@ -34,17 +36,34 @@ public class JsonpathWithMapsTests {
         System.out.println(personInfo.get("salary"));
         System.out.println(personInfo.get("hire_date"));
 
-        System.out.println(personInfo.get("links"));
-    }
+//        System.out.println(personInfo.get("links"));
 
+        Map<String, String> map = jsonPath.getMap("links[3]");
+        System.out.println(map);
+
+
+    }
 
 
     @Test
-    public void metaWeatherTest(){
+    public void metaWeatherTest() {
         JsonPath jsonPath = given().queryParam("query", "london").
                 when().get("https://www.metaweather.com/api/location/search").jsonPath();
         jsonPath.prettyPrint();
+        Map<String, Object> map = jsonPath.getMap("[0]");
+
+        System.out.println(map);
+
+        Map<String, Object> expected = new HashMap<>();
+        expected.put("woeid", 44418);
+        expected.put("location_type", "City");
+        expected.put("title", "London");
+        expected.put("latt_long", "51.506321,-0.12714");
+
+        assertThat(map, equalTo(expected));
     }
+
+
 
 
 }
