@@ -3,6 +3,7 @@ package tests.day3;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -49,6 +50,19 @@ public class DataDrivenAPITests {
                 .and().assertThat().body("region_name", equalTo(name));
     }
 
+
+    /// CsvFileSource --> test data will be read from e=csv file
+    // junit 5 will look for the given file name in test/resources folder
+    @ParameterizedTest
+    @CsvFileSource(resources = "/regions.csv")
+    public void validateRegionNameTest3(int id, String name) {
+        given().pathParam("id", id)
+                .when().get("/regions/{id}")
+                .prettyPeek()
+                .then().assertThat().statusCode(200)
+                .and().assertThat().body("region_id", equalTo(id))
+                .and().assertThat().body("region_name", equalTo(name));
+    }
 
 
 
