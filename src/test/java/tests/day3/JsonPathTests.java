@@ -60,14 +60,32 @@ class JsonPathTests {
     public void testLastName(){
 
         given().contentType(ContentType.JSON).                       // accept type is json
-                pathParam("id", "100").    // request with path param id=100
+                pathParam("id", 100).    // request with path param id=100
                 when().get("/employees/{id}").                         // when user makes get request
                 then().assertThat().statusCode(200).                            // assert that status code is 200
                 and().assertThat().body("last_name", is("King"));  // last_name id is equals to King
     }
 
+    /**
+     * given url "http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/employees/{id}"
+     * accept type is json
+     * when user makes get request with path param id=100
+     * and first href is equal to "http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/employees/100"
+     * then assert that status code is 200
+     */
 
+    @Test
+    public void link1(){
+        Response response = given().contentType(ContentType.JSON).                       // accept type is json
+                pathParam("id", 100).    // request with path param id=100
+                when().get("/employees/{id}");// when user makes get request
+        response.then().statusCode(200);
+        JsonPath jsonPath = response.jsonPath();
+        // links.href[0] --> in the json file, find key links, then find its children href and get the first one
+        String link = jsonPath.getString("links.href[0]");
+        assertThat(link, equalTo("http://ec2-34-201-69-55.compute-1.amazonaws.com:1000/ords/hr/employees/100"));
 
+    }
 
 
 }
