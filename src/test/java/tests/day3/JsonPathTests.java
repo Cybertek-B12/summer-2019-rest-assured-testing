@@ -180,6 +180,7 @@ class JsonPathTests {
          List<Integer> list = response.jsonPath().getList("items.salary");
          System.out.println(list);
 
+         // make sure that every item in the list (each salary) is bigger than 100
          assertThat(list, everyItem(greaterThan(100)));
      }
 
