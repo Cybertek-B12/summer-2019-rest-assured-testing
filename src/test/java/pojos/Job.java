@@ -1,6 +1,6 @@
 package pojos;
 
-public class Job {
+public class Job{
 
     private String job_id;
     private String job_title;
@@ -53,6 +53,5 @@ public class Job {
     public void setMax_salary(int max_salary) {
         this.max_salary = max_salary;
     }
-
 
 }
