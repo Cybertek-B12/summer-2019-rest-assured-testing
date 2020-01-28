@@ -74,9 +74,12 @@ public class TestsUsingPojos {
         Response response = given().pathParam("id", "102").
                 when().get("/employees/{id}");
 //        response.prettyPrint();
-
         Employee emp = response.as(Employee.class);
         System.out.println(emp);
+
+        //verify taht first name is lex
+        assertThat(emp.getFirstName(), equalTo("Lex"));
     }
+
 
 }

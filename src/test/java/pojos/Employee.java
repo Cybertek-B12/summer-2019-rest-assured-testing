@@ -21,11 +21,11 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "employeeId='" + employeeId + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                "employeeId=" + employeeId + '\n' +
+                ", firstName=" + firstName + '\n' +
+                ", lastName=" + lastName + '\n' +
+                ", email=" + email + '\n' +
+                ", phoneNumber=" + phoneNumber + '\n' +
                 '}';
     }
 
