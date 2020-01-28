@@ -70,7 +70,7 @@ public class TestsUsingPojos {
     }
 
     @Test
-    public void getOneEmployee(){
+    public void getOneEmployee() {
         Response response = given().pathParam("id", "102").
                 when().get("/employees/{id}");
 //        response.prettyPrint();
@@ -79,6 +79,24 @@ public class TestsUsingPojos {
 
         //verify taht first name is lex
         assertThat(emp.getFirstName(), equalTo("Lex"));
+    }
+
+    /*
+
+    Get the number of employees varify it is 25
+
+     */
+
+    @Test
+    public void allTheEmployeesCount() {
+        Response response = given().
+                when().get("/employees");
+        response.then().assertThat().statusCode(200);
+
+        List<Employee> emps = response.jsonPath().getList("items", Employee.class);
+        System.out.println(emps.size());
+
+        assertThat(emps.size(), equalTo(25));
     }
 
 
