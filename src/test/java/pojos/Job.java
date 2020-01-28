@@ -17,9 +17,9 @@ public class Job {
     @Override
     public String toString() {
         return "job_id: "+job_id +
-                "\njob_title"+job_title+
-                "\nmin_salary"+min_salary+
-                "\nmax_salary"+max_salary;
+                "\njob_title: "+job_title+
+                "\nmin_salary: "+min_salary+
+                "\nmax_salary: "+max_salary;
     }
 
     public String getJob_id() {
@@ -53,9 +53,6 @@ public class Job {
     public void setMax_salary(int max_salary) {
         this.max_salary = max_salary;
     }
-
-
-
 
 
 }
