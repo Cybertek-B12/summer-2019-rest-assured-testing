@@ -20,13 +20,13 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "employeeId=" + employeeId + '\n' +
-                ", firstName=" + firstName + '\n' +
-                ", lastName=" + lastName + '\n' +
-                ", email=" + email + '\n' +
-                ", phoneNumber=" + phoneNumber + '\n' +
-                '}';
+        return "\nEmployee {\n\t" +
+                "employeeId=" + employeeId + ",\n\t" +
+                "firstName=" + firstName + ",\n\t" +
+                "lastName=" + lastName + ",\n\t" +
+                "email=" + email + ",\n\t" +
+                "phoneNumber=" + phoneNumber + "\n\t" +
+                "}";
     }
 
     public Employee(String employeeId, String firstName, String lastName, String email, String phoneNumber) {
