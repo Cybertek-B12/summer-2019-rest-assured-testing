@@ -54,7 +54,8 @@ public class DataDrivenAPITests {
     /// CsvFileSource --> test data will be read from e=csv file
     // junit 5 will look for the given file name in test/resources folder
     @ParameterizedTest
-    @CsvFileSource(resources = "/regions.csv")
+    @CsvFileSource(resources = "/CVASDFJDDDDDFJJJJJJJFJJJFF" +
+            "'regions.csv")
     public void validateRegionNameTest3(int id, String name) {
         given().pathParam("id", id)
                 .when().get("/regions/{id}")
