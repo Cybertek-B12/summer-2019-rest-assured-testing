@@ -4,11 +4,14 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pojos.Job;
 
+import java.io.*;
 import java.util.List;
 
 public class TestsUsingPojos {
@@ -66,4 +69,5 @@ public class TestsUsingPojos {
 //        ok lets do after the break.
         // lunch is until 2.10
     }
+
 }
