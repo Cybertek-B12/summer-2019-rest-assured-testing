@@ -32,10 +32,6 @@ public class TestsUsingPojos {
         Job itJob = response.as(Job.class);
         System.out.println(itJob);
 
-        System.out.println("-------------------");
-        System.out.println("itJob.getJob_title() = " + itJob.getJob_title());
-        System.out.println("itJob.getJob_id() = " + itJob.getJob_id());
-
         // veirfy that job title is programmer
         assertThat(itJob.getJob_title(), equalTo("Programmer"));
 
@@ -63,11 +59,13 @@ public class TestsUsingPojos {
         // list contains Job type
         // desrialzaiotn is happening here. from json we get jobs
         List<Job> jobs = response.jsonPath().getList("items", Job.class);
-        System.out.println(jobs.get(0).getJob_title());
-        System.out.println(jobs.get(1).getMin_salary());
-// mizgin wants to do items. but did not use the mic
-//        ok lets do after the break.
-        // lunch is until 2.10
+        System.out.println("Number of total jobs: " + jobs.size());
+        System.out.println(jobs.get(1).getJob_title());
+
+        Job itJob = response.jsonPath().getObject("items[0]", Job.class);
+
+        System.out.println(itJob);
+
     }
 
 }
