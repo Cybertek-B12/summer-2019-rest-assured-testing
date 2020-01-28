@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pojos.Employee;
 import pojos.Job;
 
 import java.io.*;
@@ -66,6 +67,16 @@ public class TestsUsingPojos {
 
         System.out.println(itJob);
 
+    }
+
+    @Test
+    public void getOneEmployee(){
+        Response response = given().pathParam("id", "102").
+                when().get("/employees/{id}");
+//        response.prettyPrint();
+
+        Employee emp = response.as(Employee.class);
+        System.out.println(emp);
     }
 
 }
