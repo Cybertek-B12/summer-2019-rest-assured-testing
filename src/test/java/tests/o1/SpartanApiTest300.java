@@ -51,6 +51,39 @@ public class SpartanApiTest300 {
 
      }
 
+ /*
+    call the hello endpoint" /api/spartans
+        header-->
+        accept : application/json
+    verify:
+        200 status code
+        content type: application/json;charset=UTF-8
+     */
 
+    @Test
+     public void contentTypeJsonTest(){
+        given().accept(ContentType.JSON).
+            when().get("/api/spartans").
+            then().statusCode(200).
+                contentType("application/json;charset=UTF-8");
+     }
 
+  /*
+    call the hello endpoint" /api/spartans
+        header-->
+        accept : application/xml
+    verify:
+        200 status code
+        content type: application/xml;charset=UTF-8
+
+     */
+
+    @Test
+    public void contentTypeXmlTest(){
+        given().accept(ContentType.XML).
+            when().get("/api/spartans").
+            then().statusCode(200).
+                contentType("application/xml;charset=UTF-8");
+
+    }
 }
