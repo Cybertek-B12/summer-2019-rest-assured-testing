@@ -86,4 +86,33 @@ public class SpartanApiTest300 {
                 contentType("application/xml;charset=UTF-8");
 
     }
+    /*
+    call the hello endpoint" /api/spartans/{id}
+        header-->
+        accept : application/json
+        path param-->
+            id : 101
+    verify:
+        200 status code
+        body
+            "id":       101,
+            "name":     "Mr.Post",
+            "gender":   "Male",
+            "phone":    2024567892
+
+     */
+    @Test
+    public void mrPostTest(){
+        int id = 101;
+        given().accept(ContentType.JSON).
+                pathParam("id",id).
+        when().get("/api/spartans/{id}").
+        then().statusCode(200).
+            body("id", equalTo(id)).
+            body("name", equalTo("Mr.Post")).
+            body("gender", equalTo("Male")).
+            body("phone", equalTo(2024567892));
+
+    }
+
 }
