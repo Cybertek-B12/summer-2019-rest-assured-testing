@@ -35,4 +35,22 @@ public class SpartanApiTest300 {
                 and().
                     assertThat().body(is("Hello from Sparta"));
     }
+     /*
+     Bad headers test
+    call the hello endpoint" /api/hello
+    header-->
+        accept : application/json
+    verify:
+        406 status code
+     */
+
+     @Test
+    public void badHeaderTest(){
+//         given().accept(ContentType.JSON).when().get("/api/hello").then().statusCode(406);
+         given().accept("application/json").when().get("/api/hello").then().statusCode(406);
+
+     }
+
+
+
 }
