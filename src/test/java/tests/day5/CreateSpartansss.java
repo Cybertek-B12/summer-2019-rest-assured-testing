@@ -1,6 +1,7 @@
 package tests.day5;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ public class CreateSpartansss {
 
     @BeforeAll
     public static void setUp() {
-        baseURI = "http://ec2-34-201-69-55.compute-1.amazonaws.com:8000/";
+        baseURI = "http://3.92.227.9:8000/";
     }
 
     /**
@@ -62,4 +63,28 @@ public class CreateSpartansss {
 
     }
 
+    /*
+    Create a new Spartan
+   verify code 201
+    get the id from the response
+    get the spartan info using the id
+    verify same spartan if is returned
+     */
+    @Test
+    public void postANewSpartannnnn(){
+        String name = "Tabriz";
+        String gender = "Male";
+        String phone = "712342334334";
+
+        Map<String, String> spartan = new HashMap<>();
+        spartan.put("name", name);
+        spartan.put("gender", gender);
+        spartan.put("phone", phone);
+
+        Response response = given().log().everything().
+                                contentType(ContentType.JSON).
+                                 body(spartan).
+                             when().post("/api/spartans");
+        response.then().statusCode(201);
+    }
 }
