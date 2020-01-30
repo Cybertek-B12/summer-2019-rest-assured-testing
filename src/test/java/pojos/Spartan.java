@@ -1,9 +1,12 @@
 package pojos;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Spartan {
     private String gender;
     private String name;
     private int phone;
+    private int id;
 
     @Override
     public String toString() {
@@ -11,6 +14,7 @@ public class Spartan {
                 "gender='" + gender + '\'' +
                 ", name='" + name + '\'' +
                 ", phone=" + phone +
+                ", id=" + id +
                 '}';
     }
 
@@ -42,5 +46,13 @@ public class Spartan {
 
     public void setPhone(int phone) {
         this.phone = phone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

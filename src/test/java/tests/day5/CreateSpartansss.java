@@ -4,6 +4,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pojos.Spartan;
 
 import java.io.File;
 import java.io.InputStreamReader;
@@ -101,7 +102,47 @@ public class CreateSpartansss {
     }
 
     /**
-     *
-     *
+     * Create a new spartan
+     * verify status code 201
      */
+    @Test
+    public void postANewSpartannnnnn(){
+        Spartan spartan = new Spartan("Male", "Neo Prime", 2022020022);
+
+        spartan.toString();
+        given().log().everything().
+                contentType(ContentType.JSON).
+                body(spartan).
+        when().post("/api/spartans").
+                prettyPeek().
+        then().statusCode(201);
+    }
+
+
+    /**
+     * get single spartan using id
+     * verify info
+     */
+    @Test
+    public void getANewSpartannnnnn(){
+        Response response = given().accept(ContentType.JSON)
+                .pathParam("id", 482).
+                        when().get("/api/spartans/{id}");
+        response.then().statusCode(200);
+        response.prettyPrint();
+        // get the json body and convert into Spartan object
+        Spartan spartan = response.as(Spartan.class);
+
+        System.out.println(spartan.toString());
+
+    }
+
+
+
+
+
+
 }
+
+
+

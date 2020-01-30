@@ -112,7 +112,9 @@ public class SpartanApiTest300 {
             body("name", equalTo("Mr.Post")).
             body("gender", equalTo("Male")).
             body("phone", equalTo(2024567892));
-
     }
+
+
+
 
 }
