@@ -1,5 +1,6 @@
 package tests.day5;
 
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +44,14 @@ public class ThisIsTestTTT {
         given().pathParam("id", 132).
             when().get("/api/spartans/{id}").
                 prettyPeek().
-            then().statusCode(200);
+            then().statusCode(200).
+            contentType(ContentType.JSON).
+            body("id", equalTo(132)).
+            body("name", equalTo("Sinclair")).
+            body("gender", equalTo("Male")).
+            body("phone", equalTo(9714460354L));
     }
+
+
+
 }
