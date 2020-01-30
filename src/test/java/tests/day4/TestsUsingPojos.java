@@ -1,8 +1,8 @@
 package tests.day4;
 
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
