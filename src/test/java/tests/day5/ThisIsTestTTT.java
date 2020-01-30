@@ -68,6 +68,7 @@ public class ThisIsTestTTT {
             then().statusCode(200).
                 contentType(ContentType.JSON).
                 body("content.name", everyItem(containsStringIgnoringCase("ha")));
+
     }
 
 }
