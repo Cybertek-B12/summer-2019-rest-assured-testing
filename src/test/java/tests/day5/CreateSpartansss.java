@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,9 +75,9 @@ public class CreateSpartansss {
     public void postANewSpartannnnn(){
         String name = "Tabriz";
         String gender = "Male";
-        String phone = "712342334334";
+        int phone = 2022022022;
 
-        Map<String, String> spartan = new HashMap<>();
+        Map<String, Object> spartan = new HashMap<>();
         spartan.put("name", name);
         spartan.put("gender", gender);
         spartan.put("phone", phone);
@@ -85,6 +86,17 @@ public class CreateSpartansss {
                                 contentType(ContentType.JSON).
                                  body(spartan).
                              when().post("/api/spartans");
-        response.then().statusCode(201);
+        response.prettyPeek().
+                then().statusCode(201);
+        int id = response.path("data.id");
+        System.out.println(id);
+
+        given().pathParam("id", id)
+                .when().get("/api/spartans/{id}").
+                    prettyPeek().
+                then().statusCode(200).
+                    body("name", equalTo(name)).
+                    body("gender", equalTo(gender)).
+                    body("phone", equalTo(phone));
     }
 }
