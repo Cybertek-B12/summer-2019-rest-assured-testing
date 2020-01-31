@@ -137,6 +137,17 @@ public class CreateSpartansss {
 
     }
 
+    /**
+     * Create a new spartan by sending a request the spartan API
+     * pass the given spartan parameter as the request body.
+     * return the response object. response must contain json payload.
+     * @param spartan
+     * @return response
+     */
+    public Response createSpartan(Spartan spartan){
+        return null;
+    }
+
 
 
 

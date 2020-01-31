@@ -1,7 +1,5 @@
 package pojos;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Spartan {
     private String gender;
     private String name;
