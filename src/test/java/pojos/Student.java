@@ -17,7 +17,7 @@ public class Student {
     private Contact contact;
     private Company company;
 
-    public Student(int studentId, String firstName, String lastName, int batch, String joinDate, String birthDate, String password, String subject, String gender, String admissionNo, String major, String section, Contact contact, Company company) {
+    public Student( String firstName, String lastName, int batch, String joinDate, String birthDate, String password, String subject, String gender, String admissionNo, String major, String section, Contact contact, Company company) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;

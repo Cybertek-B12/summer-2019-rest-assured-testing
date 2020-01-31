@@ -27,19 +27,24 @@ public class CompanyTrainingAPITest {
     @Test
     public void postAStudentTest() {
         // create a student pojo will all required info
-        Address address = new Address(1312, "123 Some st", "Arlington", "VA", 22221);
-        Company company = new Company(312, "Foxborn Productions",
+        Address address = new Address( "123 Some st", "Arlington", "VA", 22221);
+        Company company = new Company("Foxborn Productions",
                 "Assistant Deputy Vice President", "12/26/2019", address);
-        Contact contact = new Contact(4234, "advp@foxbornproductions.com",
+        Contact contact = new Contact( "advp@foxbornproductions.com",
                 "234242343", "123 Same st, Arlington, VA, 22221");
 
-        Student student = new Student(2134, "John", "Doe", 1, "12/26/2009", "12/26/1990",
+        Student student = new Student( "John", "Doe", 1, "12/26/2009", "12/26/1990",
                 "123abc", "Java", "Male", "324234", "Programming", "section 39",
                 contact, company);
 
-      System.out.println("student = " + student);
-//        given().contentType(ContentType.JSON).accept(ContentType.JSON).
-//                body(null);
+
+
+        given().log().everything()
+                .contentType(ContentType.JSON).accept(ContentType.JSON).
+                body(student).
+            when().post("/student/create").
+                prettyPeek().
+            then().statusCode(200);
 
 
     }
