@@ -85,16 +85,18 @@ public class SpartanTest {
         int id = postResponse.path("data.id");
 
 
-        spartan.setName("Zoom");
+        spartan.setName("ulyssesbob");
         // send the new information using put
 
-        given().contentType(ContentType.JSON).
-                accept(ContentType.JSON).
+        given().
+                contentType(ContentType.JSON).   /// telling the api what kind of data format i am sending
+                accept(ContentType.JSON).       /// telling the api what kind of data format i want in return
                 pathParam("id", id).
                 body(spartan).
         when().put("/api/spartans/{id}").
             prettyPeek().
         then().statusCode(204);
+
 
         // verify the updated by getting the spartan by id
 //             * verify name is updated
