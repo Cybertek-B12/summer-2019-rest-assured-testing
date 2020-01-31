@@ -49,4 +49,20 @@ public class CompanyTrainingAPITest {
 
     }
 
+    @Test
+    public void justAtest(){
+
+        // http://www.omdbapi.com/?t
+        //=SomeMovie&apikey=sdfssdgdsfgsdfgdfgsd
+
+
+//        given().queryParam("apiKey", "lkasdhfasdhlkf").
+//                queryParam("t", "SOmeMovie").
+//                get("ASfasd")
+
+        given().header("x-api-key", "90896162-e3ef-4f00-9e9f-6ac4f1228ea2").
+                when().get("https://api.thecatapi.com/v1/images/search")
+                .prettyPeek();
+    }
+
 }
