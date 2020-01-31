@@ -33,4 +33,21 @@ public class SpartanTest {
         response.then().body("data.name", equalTo(spartan.getName()));
     }
 
+
+    /**
+     * create a new spartan
+     * then delete spartan
+     * verify status code 204
+     */
+    @Test
+    public void deleteTest(){
+        // creating the pojo
+        Spartan spartan = SpartanApiUtils.createSpartanObject();
+        // send request to api tp create a spartan
+        Response postResponse = SpartanApiUtils.createSpartan(spartan);
+        postResponse.then().statusCode(200);
+
+    }
+
+
 }
