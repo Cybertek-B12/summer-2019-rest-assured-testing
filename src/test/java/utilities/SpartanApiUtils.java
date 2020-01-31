@@ -5,6 +5,8 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import pojos.Spartan;
 
+import java.util.Random;
+
 import static io.restassured.RestAssured.given;
 
 public class SpartanApiUtils {
@@ -29,7 +31,7 @@ public class SpartanApiUtils {
     public static Spartan createSpartanObject(){
         Faker faker = new Faker();
         String name = faker.name().firstName();
-        String gender = "Female";
+        String gender= new Random().nextBoolean()? "Female": "Male";
         int phone = 2022323212;
 
         Spartan spartan = new Spartan(gender, name, phone);

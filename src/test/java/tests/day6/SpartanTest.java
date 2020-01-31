@@ -9,6 +9,7 @@ import pojos.Spartan;
 import utilities.ConfigurationReader;
 import utilities.SpartanApiUtils;
 
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class SpartanTest {
@@ -38,6 +39,7 @@ public class SpartanTest {
      * create a new spartan
      * then delete spartan
      * verify status code 204
+     * call the get spartan api and verify code 404
      */
     @Test
     public void deleteTest(){
@@ -45,8 +47,19 @@ public class SpartanTest {
         Spartan spartan = SpartanApiUtils.createSpartanObject();
         // send request to api tp create a spartan
         Response postResponse = SpartanApiUtils.createSpartan(spartan);
-        postResponse.then().statusCode(200);
+        postResponse.then().statusCode(201);
 
+        int id = postResponse.path("data.id");
+
+        given().pathParam("id", id).
+            when().delete("/api/spartans/{id}").
+            then().statusCode(204);
+
+        // call the get spartan api and verify code 404
+
+        given().pathParam("id", id).
+            when().get("/api/spartans/{id}").
+            then().statusCode(404);
     }
 
 
