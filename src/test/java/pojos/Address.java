@@ -18,7 +18,8 @@ public class Address {
                 '}';
     }
 
-    public Address(String street, String city, String state, int zipCode) {
+    public Address(int addressId, String street, String city, String state, int zipCode) {
+        this.addressId = addressId;
         this.street = street;
         this.city = city;
         this.state = state;

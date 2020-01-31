@@ -7,7 +7,8 @@ public class Company {
     private String startDate;
     private Address address;
 
-    public Company(String companyName, String title, String startDate, Address address) {
+    public Company(int companyId, String companyName, String title, String startDate, Address address) {
+        this.companyId = companyId;
         this.companyName = companyName;
         this.title = title;
         this.startDate = startDate;
