@@ -16,4 +16,15 @@ public class BasicAuthentication {
                 statusCode(200);
     }
 
+
+    @Test
+    public void challenged(){
+        given().
+                auth().basic("admin", "admin").
+        when().
+                get("https://the-internet.herokuapp.com/basic_auth").
+        then().
+                statusCode(200);
+    }
+
 }
