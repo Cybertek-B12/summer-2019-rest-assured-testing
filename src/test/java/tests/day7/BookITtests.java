@@ -24,4 +24,25 @@ public class BookITtests {
                 .prettyPeek().
         then().statusCode(422);
     }
+
+    /**
+     * get access token
+     *
+     */
+
+    @Test
+    public void testAccessToken(){
+        // team_member_email
+        String email = ConfigurationReader.get("team_member_email");
+        String password = ConfigurationReader.get("team_member_password");
+
+        given().log().everything().
+                queryParam("email", email).
+                queryParam("password", password).
+            when().get("/sign").
+                prettyPeek().
+            then().statusCode(200);
+
+    }
+
 }
