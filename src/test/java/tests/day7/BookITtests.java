@@ -5,8 +5,11 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utilities.ConfigurationReader;
+import utilities.TokenUtility;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class BookITtests {
 
@@ -68,4 +71,12 @@ public class BookITtests {
 
     // break 20 mins
 
+    /**
+     * Unit Test the token utility
+     */
+    @Test
+    public void test2(){
+        String token = TokenUtility.getToken("teacher");
+        assertThat(token, not(emptyString()));
+    }
 }
