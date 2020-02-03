@@ -1,6 +1,7 @@
 package tests.day7;
 
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utilities.ConfigurationReader;
@@ -36,13 +37,15 @@ public class BookITtests {
         String email = ConfigurationReader.get("team_member_email");
         String password = ConfigurationReader.get("team_member_password");
 
-        given().log().everything().
+        Response response = given().log().everything().
                 queryParam("email", email).
                 queryParam("password", password).
-            when().get("/sign").
-                prettyPeek().
+                when().get("/sign");
+       response. prettyPeek().
             then().statusCode(200);
 
+       String accessToken = response.path("accessToken");
+       System.out.println("accessToken = " + accessToken);
     }
 
 }
