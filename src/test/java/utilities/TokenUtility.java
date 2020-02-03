@@ -6,7 +6,7 @@ import static io.restassured.RestAssured.given;
 
 public class TokenUtility {
 
-    public static String getTeacherToken(String type) {
+    public static String getToken(String type) {
         String token=null, email=null, password = null;
 
         switch (type.toLowerCase()) {
