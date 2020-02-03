@@ -1,24 +1,29 @@
 package utilities;
 
+import com.sun.tools.classfile.ConstantPool;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
 public class TokenUtility {
 
-    public static String getToken(String type) {
+    public enum UserType{TEACHER, TEAM_LEADER, TEAM_MEMBER};
+
+
+    public static String getToken(UserType type) {
         String token=null, email=null, password = null;
 
-        switch (type.toLowerCase()) {
-            case "teacher":
+        switch (type) {
+            case TEACHER:
                 email = ConfigurationReader.get("teacher_email");
                 password = ConfigurationReader.get("teacher_password");
                 break;
-            case "team_leader":
+            case TEAM_LEADER:
                 email = ConfigurationReader.get("team_leader_email");
                 password = ConfigurationReader.get("team_leader_password");
                 break;
-            case "team_member":
+            case TEAM_MEMBER:
                 email = ConfigurationReader.get("team_member_email");
                 password = ConfigurationReader.get("team_member_password");
                 break;

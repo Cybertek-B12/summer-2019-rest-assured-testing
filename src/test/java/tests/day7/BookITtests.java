@@ -72,11 +72,20 @@ public class BookITtests {
     // break 20 mins
 
     /**
-     * Unit Test the token utility
+     * Unit Test the token utility with teacher
      */
     @Test
     public void test2(){
-        String token = TokenUtility.getToken("teacher");
+        String token = TokenUtility.getToken(TokenUtility.UserType.TEAM_LEADER);
+        assertThat(token, not(emptyString()));
+    }
+
+    /**
+     * Unit Test the token utility with team_member
+     */
+    @Test
+    public void test3(){
+        String token = TokenUtility.getToken(TokenUtility.UserType.TEAM_MEMBER);
         assertThat(token, not(emptyString()));
     }
 }
