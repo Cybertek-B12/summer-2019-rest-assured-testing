@@ -40,10 +40,12 @@ public class BookITtests {
                 queryParam("email", email).
                 queryParam("password", password).
                 when().get("/sign");
-       response. prettyPeek().
+        String accessToken = response.path("accessToken");
+
+
+        response. prettyPeek().
             then().statusCode(200);
 
-       String accessToken = response.path("accessToken");
        System.out.println("accessToken = " + accessToken);
     }
     // eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxOTc0IiwiYXVkIjoic3R1ZGVudC10ZWFtLW1lbWJlciJ9.raPyuRcS8xM5eOhEW4qxepwbs9XHPjlV4Xo8CIPxaPs
@@ -63,5 +65,7 @@ public class BookITtests {
         then().
                 statusCode(200);
     }
+
+    // break 20 mins
 
 }
