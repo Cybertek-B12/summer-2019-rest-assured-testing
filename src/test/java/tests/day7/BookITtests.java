@@ -6,8 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utilities.ConfigurationReader;
 
-import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
+import static io.restassured.RestAssured.*;
 
 public class BookITtests {
 
@@ -46,6 +45,23 @@ public class BookITtests {
 
        String accessToken = response.path("accessToken");
        System.out.println("accessToken = " + accessToken);
+    }
+    // eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxOTc0IiwiYXVkIjoic3R1ZGVudC10ZWFtLW1lbWJlciJ9.raPyuRcS8xM5eOhEW4qxepwbs9XHPjlV4Xo8CIPxaPs
+
+    /**
+     * get all campuses by providing access token
+     */
+
+    @Test
+        public void getAllCampuses(){
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxOTc0IiwiYXVkIjoic3R1ZGVudC10ZWFtLW1lbWJlciJ9.raPyuRcS8xM5eOhEW4qxepwbs9XHPjlV4Xo8CIPxaPs";
+        given().
+                header("Authorization", token).
+        when().
+                get("/api/campuses").
+                prettyPeek().
+        then().
+                statusCode(200);
     }
 
 }
