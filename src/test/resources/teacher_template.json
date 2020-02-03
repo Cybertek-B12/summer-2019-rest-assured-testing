@@ -12,7 +12,7 @@
               "type": "integer"
             },
             "firstName": {
-              "type": "integer"
+              "type": "string"
             },
             "lastName": {
               "type": "string"
