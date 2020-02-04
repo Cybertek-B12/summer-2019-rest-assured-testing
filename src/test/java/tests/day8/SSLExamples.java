@@ -17,4 +17,26 @@ public class SSLExamples {
         then().
                 statusCode(200);
     }
+
+
+    @Test
+    public void useKeyStore(){
+        // in the trustStore() we pass the location of trust store file and the password of the file
+        given().
+                trustStore("/path/to/file", "password").
+        when().
+                get("").
+        then().
+                statusCode(200);
+
+
+
+        // in the keyStore() we pass the location of trust store file and the password of the file
+        given().
+                keyStore("/path/to/file", "password").
+        when().
+                get("").
+        then().
+                statusCode(200);
+    }
 }
