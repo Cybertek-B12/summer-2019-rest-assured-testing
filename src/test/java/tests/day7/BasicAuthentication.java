@@ -6,6 +6,8 @@ import static io.restassured.RestAssured.given;
 
 public class BasicAuthentication {
 
+
+
     @Test
     public void preemptive(){
         given().
@@ -20,7 +22,8 @@ public class BasicAuthentication {
     @Test
     public void challenged(){
         given().
-                auth().basic("admin", "admin").
+                auth().
+                    basic("admin", "admin").
         when().
                 get("https://the-internet.herokuapp.com/basic_auth").
         then().

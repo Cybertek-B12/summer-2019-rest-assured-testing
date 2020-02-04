@@ -59,6 +59,7 @@ public class BookitStudentTests {
     /*
     Try to create new student using the post method to /api/students/student
     by using the token of a team member
+    verify status code 403
     verify error message only teacher allowed to modify database
      */
     @Test
@@ -101,6 +102,7 @@ public class BookitStudentTests {
     /*
     Try to create new student using the post method to /api/students/student
     by using the token of a team leader
+    verify status code 403
     verify error message only teacher allowed to modify database
      */
     @Test
@@ -117,6 +119,30 @@ public class BookitStudentTests {
         then().
                 statusCode(403).
                 body(containsString("only teacher allowed to modify database."));
+
+
+    }
+
+    /**
+     * Create new student using the post method to /api/students/student
+     * by using the token of a teacher
+     * verify status code 201
+     * verify error message only teacher allowed to modify database
+     */
+    @Test
+    public void testTeacher(){
+        Map<String, Object> newStudent = getNewStudent();
+        String token = TokenUtility.getToken(TEACHER);
+
+        given().log().all().
+                header("Authorization", token).
+                params(newStudent).
+        when().
+                post("api/students/student").
+                prettyPeek().
+        then().
+                statusCode(201).
+                body(endsWith("has been added to database."));
 
     }
 
