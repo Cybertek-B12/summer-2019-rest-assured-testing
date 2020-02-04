@@ -1,12 +1,15 @@
 package tests.day8;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import utilities.ConfigurationReader;
 import utilities.TokenUtility;
 
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.not;
@@ -32,7 +35,17 @@ public class BookitStudentTests {
 
         // get a token
         String token = TokenUtility.getToken(TEAM_MEMBER);
-        // get all students
         assertThat(token, not(emptyOrNullString()));
+        // get all students
+
+        given().
+                header("Authorization", token).
+        when().
+                get("/api/students").
+                prettyPeek().
+        then().
+                statusCode(200).
+                contentType(ContentType.JSON);
+
     }
 }
