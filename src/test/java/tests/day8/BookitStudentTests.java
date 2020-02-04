@@ -103,7 +103,22 @@ public class BookitStudentTests {
     by using the token of a team leader
     verify error message only teacher allowed to modify database
      */
+    @Test
+    public void testTeamLeader(){
+        Map<String, Object> newStudent = getNewStudent();
+        String token = TokenUtility.getToken(TEAM_LEADER);
 
+        given().
+                header("Authorization", token).
+                params(newStudent).
+        when().
+                post("/api/students/student").
+                prettyPeek().
+        then().
+                statusCode(403).
+                body(containsString("only teacher allowed to modify database."));
+
+    }
 
 
 
