@@ -80,7 +80,6 @@ public class BookitStudentTests {
                 statusCode(403).
                 body(containsString("only teacher allowed to modify database."));
 
-
     }
 
     public Map<String, Object> getNewStudent(){
@@ -98,6 +97,12 @@ public class BookitStudentTests {
 
         return student;
     }
+
+    /*
+    Try to create new student using the post method to /api/students/student
+    by using the token of a team leader
+    verify error message only teacher allowed to modify database
+     */
 
 
 
