@@ -1,5 +1,6 @@
 package tests.day8;
 
+import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -9,7 +10,9 @@ import org.junit.jupiter.api.TestInstance;
 import utilities.ConfigurationReader;
 import utilities.TokenUtility;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
@@ -53,6 +56,31 @@ public class BookitStudentTests {
         System.out.println("firstNames.size() = " + firstNames.size());
 
     }
+
+    /*
+    Try to create new student using the post method
+    by using the token of a team member
+    verify error message only teacher allowed to modify database
+     */
+
+
+
+    public Map<String, Object> getNewStudent(){
+        Map<String, Object> student = new HashMap<>();
+        Faker faker = new Faker();
+
+        student.put("first-name", faker.name().firstName());
+        student.put("last-name", faker.name().lastName());
+        student.put("email", faker.internet().emailAddress());
+        student.put("password", "password");
+        student.put("role", "student-team-member");
+        student.put("campus-location", "VA");
+        student.put("batch-number", 12);
+        student.put("team-name", "bestteam");
+
+        return student;
+    }
+
 
 
 
