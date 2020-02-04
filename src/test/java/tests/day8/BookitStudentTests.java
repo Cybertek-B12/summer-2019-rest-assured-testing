@@ -17,8 +17,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.emptyOrNullString;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import static utilities.TokenUtility.UserType.*;
 
 // when we add this annotation, we dont have to make the beforeall method static
@@ -58,12 +57,31 @@ public class BookitStudentTests {
     }
 
     /*
-    Try to create new student using the post method
+    Try to create new student using the post method to /api/students/student
     by using the token of a team member
     verify error message only teacher allowed to modify database
      */
+    @Test
+    public void testTeamMember(){
+        // create a map that contains key / values which represents a new student info
+        Map<String, Object> newStudent = getNewStudent();
+        System.out.println(newStudent);
+        // get token for a team member
+        String token = TokenUtility.getToken(TEAM_MEMBER);
+        // send query by passing the stydent map as query param
+        // and the team member token
+        given().
+                header("Authorization", token).
+                queryParams(newStudent).
+        when().
+                post("/api/students/student").
+                prettyPeek().
+        then().
+                statusCode(403).
+                body(containsString("only teacher allowed to modify database."));
 
 
+    }
 
     public Map<String, Object> getNewStudent(){
         Map<String, Object> student = new HashMap<>();
