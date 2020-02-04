@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "teachers": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "teacherId": {
+              "type": "integer"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "emailAddress": {
+              "type": "string"
+            },
+            "joinDate": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "subject": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "department": {
+              "type": "string"
+            },
+            "birthDate": {
+              "type": "string"
+            },
+            "salary": {
+              "type": "integer"
+            },
+            "batch": {
+              "type": "integer"
+            },
+            "section": {
+              "type": "string"
+            },
+            "premanentAddress": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "teacherId",
+            "firstName",
+            "lastName",
+            "emailAddress",
+            "joinDate",
+            "password",
+            "phone",
+            "subject",
+            "gender",
+            "department",
+            "birthDate",
+            "salary",
+            "batch",
+            "section",
+            "premanentAddress"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "teachers"
+  ]
+}
