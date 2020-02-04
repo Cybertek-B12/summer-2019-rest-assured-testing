@@ -40,7 +40,7 @@ public class BookitStudentTests {
         String token = TokenUtility.getToken(TEAM_MEMBER);
         assertThat(token, not(emptyOrNullString()));
         // get all students
-
+        System.out.println(token);
        Response response = given().
                 header("Authorization", token).
         when().
@@ -53,4 +53,7 @@ public class BookitStudentTests {
         System.out.println("firstNames.size() = " + firstNames.size());
 
     }
+
+
+
 }
