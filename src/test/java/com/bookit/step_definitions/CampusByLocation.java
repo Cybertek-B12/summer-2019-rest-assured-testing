@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.junit.Test;
 
 import java.util.Map;
 
@@ -58,6 +59,7 @@ public class CampusByLocation extends Base{
     /**
      * this is just example. doing the same thing above without cucumber
      */
+    @Test
     public void testTheSameThing(){
         RestAssured.baseURI = Environment.BASE_URI;
         String token = TokenUtility.getToken(TEAM_MEMBER);
