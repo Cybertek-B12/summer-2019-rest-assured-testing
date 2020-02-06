@@ -14,16 +14,16 @@ public class TokenUtility {
 
         switch (type) {
             case TEACHER:
-                email = ConfigurationReader.get("teacher_email");
-                password = ConfigurationReader.get("teacher_password");
+                email = Environment.TEACHER_USERNAME;
+                password = Environment.TEACHER_PASSWORD;
                 break;
             case TEAM_LEADER:
-                email = ConfigurationReader.get("team_leader_email");
-                password = ConfigurationReader.get("team_leader_password");
+                email = Environment.LEADER_USERNAME;
+                password = Environment.LEADER_PASSWORD;
                 break;
             case TEAM_MEMBER:
-                email = ConfigurationReader.get("team_member_email");
-                password = ConfigurationReader.get("team_member_password");
+                email = Environment.MEMBER_USERNAME;
+                password = Environment.MEMBER_PASSWORD;
                 break;
         }
         Response response = given().

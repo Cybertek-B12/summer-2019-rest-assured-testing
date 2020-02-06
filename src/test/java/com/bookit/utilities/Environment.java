@@ -22,7 +22,8 @@ public class Environment {
 		Properties properties = null;
 		String environment = ConfigurationReader.get("environment");
 		try {
-			String path = String.format("src/test/resources/environment/%s.properties", environment);
+//			String path = String.format("src/test/resources/environment/%s.properties", environment);
+			String path = "src/test/resources/environment/"+environment+".properties";
 			FileInputStream input = new FileInputStream(path);
 			properties = new Properties();
 			properties.load(input);
