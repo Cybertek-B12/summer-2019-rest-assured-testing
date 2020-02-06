@@ -14,15 +14,16 @@ import java.util.Map;
 
 import static com.bookit.utilities.TokenUtility.UserType.*;
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 
-public class CampusByLocation extends Base{
+public class CampusByLocation extends Base {
 
     @Given("I have a token as a student team member")
     public void i_have_a_token_as_a_student_team_member() {
         String token = TokenUtility.getToken(TEAM_MEMBER);
-        request= given().log().all()
+        request = given().log().all()
                 .header("Authorization", token);
         System.out.println(token);
     }
@@ -40,13 +41,14 @@ public class CampusByLocation extends Base{
     public void i_send_a_request_to(String method, String endpoint) {
         if (method.equals("get")) {
             System.out.println(endpoint);
-             response = request.when().get(endpoint);
-             response.then().log().everything();
+            response = request.when().get(endpoint);
+            response.then().log().everything();
         }
     }
 
     @Then("the response code should be {int}")
     public void the_response_code_should_be(Integer code) {
+        response.prettyPrint();
         response.then().statusCode(code);
     }
 
@@ -60,15 +62,15 @@ public class CampusByLocation extends Base{
      * this is just example. doing the same thing above without cucumber
      */
     @Test
-    public void testTheSameThing(){
+    public void testTheSameThing() {
         RestAssured.baseURI = Environment.BASE_URI;
         String token = TokenUtility.getToken(TEAM_MEMBER);
         Response response =
                 given().
-                    header("Authorization", token).
-                    pathParams("campus_location", "VA").
-                when().
-                    get("/api/campuses/{campus_location}");
+                        header("Authorization", token).
+                        pathParams("campus_location", "VA").
+                        when().
+                        get("/api/campuses/{campus_location}");
         response.
                 then().
                 statusCode(200).
@@ -76,5 +78,12 @@ public class CampusByLocation extends Base{
 
 
     }
+
+    @Given("I post a new student using {string}")
+    public void i_post_a_new_student_using(String endpoint) {
+        // post
+        response = request.when().post(endpoint);
+    }
+
 
 }

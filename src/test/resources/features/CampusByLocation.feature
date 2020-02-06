@@ -17,7 +17,7 @@ Feature: Campus by location
       | campus_location | IL |
     When I send a "get" request to "/api/campuses/{campus_location}"
     Then the response code should be 200
-    And the response should contain "shgoogle"
+    And the response should contain "google"
 
 
 
