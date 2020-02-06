@@ -1,5 +1,6 @@
 package com.bookit.step_definitions;
 
+import com.bookit.utilities.Environment;
 import com.bookit.utilities.TokenUtility;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,15 +12,11 @@ import io.restassured.specification.RequestSpecification;
 import java.util.Map;
 
 import static com.bookit.utilities.TokenUtility.UserType.*;
-import static com.sun.jmx.snmp.ThreadContext.contains;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 
-public class CampusByLocation {
-
-    RequestSpecification request;
-    Response response;
+public class CampusByLocation extends Base{
 
     @Given("I have a token as a student team member")
     public void i_have_a_token_as_a_student_team_member() {
@@ -38,7 +35,6 @@ public class CampusByLocation {
         }
     }
 
-
     @When("I send a {string} request to {string}")
     public void i_send_a_request_to(String method, String endpoint) {
         if (method.equals("get")) {
@@ -56,6 +52,27 @@ public class CampusByLocation {
     @Then("the response should contain {string}")
     public void the_response_should_contain(String expected) {
         assertThat(response.asString(), containsString(expected));
+    }
+
+
+    /**
+     * this is just example. doing the same thing above without cucumber
+     */
+    public void testTheSameThing(){
+        RestAssured.baseURI = Environment.BASE_URI;
+        String token = TokenUtility.getToken(TEAM_MEMBER);
+        Response response =
+                given().
+                    header("Authorization", token).
+                    pathParams("campus_location", "VA").
+                when().
+                    get("/api/campuses/{campus_location}");
+        response.
+                then().
+                statusCode(200).
+                body(containsString("light-side"));
+
+
     }
 
 }
