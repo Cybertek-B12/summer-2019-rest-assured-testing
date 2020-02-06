@@ -88,7 +88,7 @@ public class CampusByLocation extends Base {
         Map<String, Object> student = UserUtility.getNewStudent();
         // send a post request
         response = request
-                        .pathParams(student)
+                        .queryParams(student)
                     .when()
                         .post(endpoint);
     }
