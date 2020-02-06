@@ -2,3 +2,4 @@ target/
 .idea/
 summer2019localcucumberselenium.iml
 *.log
+*.DS_Store
