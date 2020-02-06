@@ -1,5 +1,7 @@
 package com.bookit.utilities;
 
+import com.github.javafaker.Faker;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,9 +47,30 @@ public class UserUtility {
     }
 
     public static void main(String[] args) {
-        System.out.println(getUserCredentials( ApplicationConstants.STUDENT_TEAM_LEADER,
+        System.out.println(
+                getUserCredentials( ApplicationConstants.STUDENT_TEAM_LEADER,
                 ApplicationConstants.LIGHT_SIDE));
     }
+
+    /**
+     *
+     */
+    public Map<String, Object> getNewStudent(){
+        Map<String, Object> student = new HashMap<>();
+        Faker faker = new Faker();
+
+        student.put("first-name", faker.name().firstName());
+        student.put("last-name", faker.name().lastName());
+        student.put("email", faker.internet().emailAddress());
+        student.put("password", "password");
+        student.put("role", "student-team-member");
+        student.put("campus-location", "VA");
+        student.put("batch-number", 12);
+        student.put("team-name", "Online_Hackers");
+
+        return student;
+    }
+
 }
 
 

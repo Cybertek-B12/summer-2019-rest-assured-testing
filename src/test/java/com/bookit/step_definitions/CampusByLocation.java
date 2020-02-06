@@ -1,5 +1,6 @@
 package com.bookit.step_definitions;
 
+import com.bookit.utilities.Driver;
 import com.bookit.utilities.Environment;
 import com.bookit.utilities.TokenUtility;
 import io.cucumber.java.en.Given;
@@ -7,25 +8,26 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.util.Map;
 
 import static com.bookit.utilities.TokenUtility.UserType.*;
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 
 public class CampusByLocation extends Base {
+    private static final Logger logger = LogManager.getLogger(Driver.class);
 
     @Given("I have a token as a student team member")
     public void i_have_a_token_as_a_student_team_member() {
         String token = TokenUtility.getToken(TEAM_MEMBER);
         request = given().log().all()
                 .header("Authorization", token);
-        System.out.println(token);
+        logger.info(token);
     }
 
     @Given("request has the following {string} parameters")
@@ -81,7 +83,6 @@ public class CampusByLocation extends Base {
 
     @Given("I post a new student using {string}")
     public void i_post_a_new_student_using(String endpoint) {
-        // post
         response = request.when().post(endpoint);
     }
 
