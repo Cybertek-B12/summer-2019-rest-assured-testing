@@ -55,7 +55,7 @@ public class UserUtility {
     /**
      *
      */
-    public Map<String, Object> getNewStudent(){
+    public static Map<String, Object> getNewStudent(){
         Map<String, Object> student = new HashMap<>();
         Faker faker = new Faker();
 

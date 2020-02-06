@@ -3,6 +3,7 @@ package com.bookit.step_definitions;
 import com.bookit.utilities.Driver;
 import com.bookit.utilities.Environment;
 import com.bookit.utilities.TokenUtility;
+import com.bookit.utilities.UserUtility;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -83,7 +84,13 @@ public class CampusByLocation extends Base {
 
     @Given("I post a new student using {string}")
     public void i_post_a_new_student_using(String endpoint) {
-        response = request.when().post(endpoint);
+        // create a new student information
+        Map<String, Object> student = UserUtility.getNewStudent();
+        // send a post request
+        response = request
+                        .pathParams(student)
+                    .when()
+                        .post(endpoint);
     }
 
 
