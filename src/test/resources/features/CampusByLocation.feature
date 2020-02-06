@@ -1,6 +1,6 @@
 Feature: Campus by location
 
-  @campus
+  @campus @ws
   Scenario: Va campus
     Given I have a token as a student team member
     And request has the following "path" parameters
