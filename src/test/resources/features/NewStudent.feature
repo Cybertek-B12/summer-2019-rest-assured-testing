@@ -6,9 +6,10 @@ Feature: Create a new student
     When I post a new student using "/api/students/student"
     Then the response code should be 403
 
-  @post_student
+  @post_student @ui
     Scenario: Create and verify new student info
     Given I have a token as a teacher
     When I post a new student using "/api/students/student"
     Then the response code should be 201
     And the response should contain student name
+    And I should be able to login with same student information

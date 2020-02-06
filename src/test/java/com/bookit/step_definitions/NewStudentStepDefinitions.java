@@ -1,13 +1,19 @@
 package com.bookit.step_definitions;
 
+import com.bookit.pages.SignInPage;
+import com.bookit.utilities.Driver;
+import com.bookit.utilities.Environment;
 import com.bookit.utilities.TokenUtility;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import static com.bookit.utilities.TokenUtility.UserType.TEACHER;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
+
+import static com.bookit.utilities.TokenUtility.UserType.TEACHER;
 
 public class NewStudentStepDefinitions extends Base{
 
@@ -23,8 +29,23 @@ public class NewStudentStepDefinitions extends Base{
 
     @Then("the response should contain student name")
     public void the_response_should_contain_student_name() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+        String name = (String) student.get("first-name") + " "+student.get("last-name");
+        assertThat(response.asString(), containsString(name));
+    }
+
+
+
+    @Given("I should be able to login with same student information")
+    public void i_should_be_able_to_login_with_same_student_information() {
+        // go to login page
+        Driver.get().get(Environment.URL);
+        // login using student info
+        SignInPage signInPage = new SignInPage();
+        String email = (String) student.get("email");
+        String password = (String) student.get("password");
+        signInPage.login(email, password);
+        // verify title
+        assertThat(Driver.get().getCurrentUrl(), endsWith("map"));
     }
 
 }

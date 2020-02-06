@@ -51,7 +51,8 @@ public class CampusByLocation extends Base {
 
     @Then("the response code should be {int}")
     public void the_response_code_should_be(Integer code) {
-        response.prettyPrint();
+        logger.info(response.statusLine());
+        logger.info(response.asString());
         response.then().statusCode(code);
     }
 
@@ -85,13 +86,12 @@ public class CampusByLocation extends Base {
     @Given("I post a new student using {string}")
     public void i_post_a_new_student_using(String endpoint) {
         // create a new student information
-        Map<String, Object> student = UserUtility.getNewStudent();
+       student = UserUtility.getNewStudent();
         // send a post request
         response = request
                         .queryParams(student)
                     .when()
                         .post(endpoint);
     }
-
 
 }
