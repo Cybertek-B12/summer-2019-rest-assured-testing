@@ -4,6 +4,6 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public abstract class Base {
-    protected RequestSpecification request;
-    protected Response response;
+    protected static RequestSpecification request;
+    protected static Response response;
 }

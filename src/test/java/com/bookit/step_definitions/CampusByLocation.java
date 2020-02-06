@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 
 public class CampusByLocation extends Base {
-    private static final Logger logger = LogManager.getLogger(Driver.class);
+    private static final Logger logger = LogManager.getLogger(CampusByLocation.class);
 
     @Given("I have a token as a student team member")
     public void i_have_a_token_as_a_student_team_member() {
