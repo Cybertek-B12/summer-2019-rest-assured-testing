@@ -9,11 +9,14 @@ import java.util.Map;
 public class DBUtils {
 
 	public static void main(String[] args) {
-		createConnection("jdbc:mysql://3.87.155.124:3306/bitnami_orocrm", "qa_user", "qa_user");
-		String query = "select * from orocrm_contact";
-		System.out.println(getColumnData(query, "first_name"));
+		createConnection(Environment.DB_HOST, Environment.DB_USERNAME, Environment.DB_PASSWORD);
 
-		destroy();
+		String query = "select * from users where email = 'dasia.rodriguez@yahoo.com'";
+		List<List<Object>> queryResultList = getQueryResultList(query);
+		System.out.println(queryResultList);
+
+		Object cellValue = getCellValue("select id from users where email = 'dasia.rodriguez@yahoo.com'");
+		System.out.println(cellValue);
 	}
 
 	private static Connection connection;
