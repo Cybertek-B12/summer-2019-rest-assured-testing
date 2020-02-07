@@ -30,7 +30,6 @@ Feature: Get student by id
     And I used the same id in my new request
     When I send a "delete" request to "/api/students/{id}"
     Then the response code should be 204
-    And the response should contain "has been deleted"
 
 
 
