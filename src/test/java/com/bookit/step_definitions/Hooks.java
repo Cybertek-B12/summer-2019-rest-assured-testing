@@ -22,12 +22,12 @@ public class Hooks {
     }
 
     @Before("@ws")
-    public void setUpWs(){
+    public void setUpWs() {
         RestAssured.baseURI = Environment.BASE_URI;
     }
 
     @Before("@db")
-    public void setUpDB(){
+    public void setUpDB() {
         DBUtils.createConnection(Environment.DB_HOST, Environment.DB_USERNAME, Environment.DB_PASSWORD);
     }
 
@@ -44,4 +44,4 @@ public class Hooks {
     }
 
 
-    }
+}

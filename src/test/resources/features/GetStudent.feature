@@ -10,15 +10,27 @@ Feature: Get student by id
     And the response should contain "Meg"
     And the response should contain "student-team-member"
 
-  @get_single_student @db
+   @db
   Scenario: verify new student info using get student endpoint
     Given I have a token as a teacher
     And I post a new student using "/api/students/student"
     And I get the student id from db
     And I have a token as a teacher
-    And I used the same in in my new request
+    And I used the same id in my new request
     When I send a "get" request to "/api/students/{id}"
     Then the response code should be 200
     And the response should contain student name
+
+  @get_single_student @db
+  Scenario: create and delete a stydent
+    Given I have a token as a teacher
+    And I post a new student using "/api/students/student"
+    And I get the student id from db
+    And I have a token as a teacher
+    And I used the same id in my new request
+    When I send a "delete" request to "/api/students/{id}"
+    Then the response code should be 200
+    And the response should contain "has been deleted"
+
 
 

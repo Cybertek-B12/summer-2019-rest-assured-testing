@@ -59,7 +59,7 @@ public class NewStudentStepDefinitions extends Base {
         logger.info(id);
     }
 
-    @Given("I used the same in in my new request")
+    @Given("I used the same id in my new request")
     public void i_used_the_same_in_in_my_new_request() {
         request.pathParam("id", id);
     }
