@@ -42,11 +42,13 @@ public class CampusByLocation extends Base {
 
     @When("I send a {string} request to {string}")
     public void i_send_a_request_to(String method, String endpoint) {
+        logger.info(endpoint);
         if (method.equals("get")) {
-            System.out.println(endpoint);
             response = request.when().get(endpoint);
-            response.then().log().everything();
+        } else if(method.equals("delete")){
+            response = request.when().delete(endpoint);
         }
+        response.then().log().everything();
     }
 
     @Then("the response code should be {int}")

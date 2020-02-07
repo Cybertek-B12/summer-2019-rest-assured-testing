@@ -29,7 +29,7 @@ Feature: Get student by id
     And I have a token as a teacher
     And I used the same id in my new request
     When I send a "delete" request to "/api/students/{id}"
-    Then the response code should be 200
+    Then the response code should be 204
     And the response should contain "has been deleted"
 
 
