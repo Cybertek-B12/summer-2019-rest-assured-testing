@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/bookit/step_definitions"
         , dryRun = false
-        , tags = "@post_student"
+        , tags = "@get_single_student"
 )
 public class CukesRunner {
 }
