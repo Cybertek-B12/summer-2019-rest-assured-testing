@@ -52,9 +52,10 @@ public class NewStudentStepDefinitions extends Base{
 
     @Given("I get the student id from db")
     public void i_get_the_student_id_from_db() {
-        String sql = "select id from users where email = '"+student.get("email")+"'";
-        String id = (String) DBUtils.getCellValue(sql);
-        System.out.println(id);
+        String sql = "select id from users where email = '"+student.get("email")+"';";
+        logger.info(sql);
+        Long id = (Long) DBUtils.getCellValue(sql);
+        logger.info(id);
     }
 
 

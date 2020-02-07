@@ -1,7 +1,6 @@
 package com.bookit.step_definitions;
 
 import com.bookit.utilities.DBUtils;
-import com.bookit.utilities.DbUtility;
 import com.bookit.utilities.Driver;
 import com.bookit.utilities.Environment;
 import io.cucumber.core.api.Scenario;
@@ -29,7 +28,7 @@ public class Hooks {
 
     @Before("@db")
     public void setUpDB(){
-        DbUtility.createConnection(Environment.DB_HOST, Environment.DB_USERNAME, Environment.DB_PASSWORD);
+        DBUtils.createConnection(Environment.DB_HOST, Environment.DB_USERNAME, Environment.DB_PASSWORD);
     }
 
     @After("@ui or @db")
@@ -45,13 +44,4 @@ public class Hooks {
     }
 
 
-    public static void main(String[] args) {
-        DbUtility.createConnection(Environment.DB_HOST, Environment.DB_USERNAME, Environment.DB_PASSWORD);
-        String q = "Select * from team;";
-        List<List<Object>> queryResultList = DbUtility.getQueryResultList(q);
-        System.out.println(queryResultList);
-
-        DBUtils.destroy();
-
     }
-}
