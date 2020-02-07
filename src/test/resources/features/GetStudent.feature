@@ -16,8 +16,7 @@ Feature: Get student by id
     And I post a new student using "/api/students/student"
     And I get the student id from db
     And I have a token as a teacher
-    And request has the following "path" parameters
-      | id | db |
+    And I used the same in in my new request
     When I send a "get" request to "/api/students/{id}"
     Then the response code should be 200
     And the response should contain student name

@@ -16,9 +16,10 @@ import static org.hamcrest.Matchers.*;
 
 import static com.bookit.utilities.TokenUtility.UserType.TEACHER;
 
-public class NewStudentStepDefinitions extends Base{
+public class NewStudentStepDefinitions extends Base {
 
     private static final Logger logger = LogManager.getLogger(NewStudentStepDefinitions.class);
+    Long id;
 
     @Given("I have a token as a teacher")
     public void i_have_a_token_as_a_teacher() {
@@ -30,10 +31,10 @@ public class NewStudentStepDefinitions extends Base{
 
     @Then("the response should contain student name")
     public void the_response_should_contain_student_name() {
-        String name = (String) student.get("first-name") + " "+student.get("last-name");
-        assertThat(response.asString(), containsString(name));
+//        String name = (String) student.get("first-name") + " " + student.get("last-name");
+        assertThat(response.asString(), containsString(student.get("first-name").toString()));
+        assertThat(response.asString(), containsString(student.get("last-name").toString()));
     }
-
 
 
     @Given("I should be able to login with same student information")
@@ -52,10 +53,15 @@ public class NewStudentStepDefinitions extends Base{
 
     @Given("I get the student id from db")
     public void i_get_the_student_id_from_db() {
-        String sql = "select id from users where email = '"+student.get("email")+"';";
+        String sql = "select id from users where email = '" + student.get("email") + "';";
         logger.info(sql);
-        Long id = (Long) DBUtils.getCellValue(sql);
+        id = (Long) DBUtils.getCellValue(sql);
         logger.info(id);
+    }
+
+    @Given("I used the same in in my new request")
+    public void i_used_the_same_in_in_my_new_request() {
+        request.pathParam("id", id);
     }
 
 
