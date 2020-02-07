@@ -10,6 +10,7 @@ import io.restassured.RestAssured;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,16 +32,26 @@ public class Hooks {
         DBUtils.createConnection(Environment.DB_HOST, Environment.DB_USERNAME, Environment.DB_PASSWORD);
     }
 
-    @After("@ui or @db")
+    @After()
     public void tearDown(Scenario scenario) {
-        System.out.println("I am reporting the results");
-        if (scenario.isFailed()) {
-            final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
-            scenario.embed(screenshot, "image/png");
+
+        List<String> tags = (List<String>) scenario.getSourceTagNames();
+
+        System.out.println(tags);
+        System.out.println(scenario.getName());
+        // run this code only of we have ui related tag
+        if (tags.contains("@ui")) {
+            if (scenario.isFailed()) {
+                final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
+                scenario.embed(screenshot, "image/png");
+            }
+            Driver.closeDriver();
         }
-        DBUtils.destroy();
-        System.out.println("Closing driver");
-        Driver.closeDriver();
+        // run this code only of we have database related tag
+        if (tags.contains("@db")) {
+            DBUtils.destroy();
+        }
+
     }
 
 
