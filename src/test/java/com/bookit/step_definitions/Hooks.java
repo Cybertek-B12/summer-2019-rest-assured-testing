@@ -29,7 +29,6 @@ public class Hooks {
 
     @Before("@db")
     public void setUpDB(){
-
         DbUtility.createConnection(Environment.DB_HOST, Environment.DB_USERNAME, Environment.DB_PASSWORD);
     }
 

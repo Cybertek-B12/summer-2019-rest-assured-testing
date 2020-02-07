@@ -1,6 +1,6 @@
+@ws
 Feature: Get student by id
 
-  @get_single_student @ws
   Scenario: get student by id
     Given I have a token as a teacher
     And request has the following "path" parameters
@@ -10,7 +10,7 @@ Feature: Get student by id
     And the response should contain "Meg"
     And the response should contain "student-team-member"
 
-
+  @get_single_student @db
   Scenario: verify new student info using get student endpoint
     Given I have a token as a teacher
     And I post a new student using "/api/students/student"

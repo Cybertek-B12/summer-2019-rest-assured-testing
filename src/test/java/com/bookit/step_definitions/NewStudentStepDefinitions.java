@@ -1,6 +1,7 @@
 package com.bookit.step_definitions;
 
 import com.bookit.pages.SignInPage;
+import com.bookit.utilities.DBUtils;
 import com.bookit.utilities.Driver;
 import com.bookit.utilities.Environment;
 import com.bookit.utilities.TokenUtility;
@@ -47,5 +48,14 @@ public class NewStudentStepDefinitions extends Base{
         // verify title
         assertThat(Driver.get().getCurrentUrl(), endsWith("map"));
     }
+
+
+    @Given("I get the student id from db")
+    public void i_get_the_student_id_from_db() {
+        String sql = "select id from users where email = '"+student.get("email")+"'";
+        String id = (String) DBUtils.getCellValue(sql);
+        System.out.println(id);
+    }
+
 
 }
